@@ -35,7 +35,7 @@ class Solver:
         while i< len(self.servers):
             server = self.servers[i]
             i+=1
-            if server[0] != size: continue
+            if server[0] > size: continue
             if server[3] == True : continue
             return i-1
         return -1
@@ -88,6 +88,14 @@ class Solver:
                         f.write()
 
 
+    def __repr__(self):
+        res = ""
+        for i in range(self.rangesNumber):
+            for j in range(self.slotsPerRange):
+                res += str(self.grid[i][j]) + " "
+            res += "\n"
+        return res
 
 if __name__ == "__main__":
     s = Solver("dc.in")
+    print s
