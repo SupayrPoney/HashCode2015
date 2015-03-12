@@ -21,4 +21,5 @@ class Solver:
                 s, c = map(int, line.strip().split())
                 self.servers.append((s,c))
 
-Solver("dc.in")
+if __name__ == "__main__":
+    Solver("dc.in")
