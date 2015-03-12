@@ -38,12 +38,12 @@ def main():
                     g = (g + 1)%solver.groupsNumber
                     placed = True
 
-
     print len(filter(lambda s: s[3], solver.servers)), "servers places"
     print len(filter(lambda s: not s[3], solver.servers)), "servers a placer"
     print solver
     print "\033[1;31mYOU WIN", solver.getScore(), "\033[0m"
     solver.unusedServer()
+    print solver.maxHoleSize()
 
 if __name__ == "__main__":
     main()
