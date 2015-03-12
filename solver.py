@@ -95,6 +95,19 @@ class Solver:
             res += "\n"
         return res
 
+    def maxHoleSize(self):
+        longest, now = 0, 0
+        for line in self.grid:
+            for serv in line:
+                if serv == -1:
+                    now += 1
+                else:
+                    if now > longest:
+                        longest = now
+                    now = 0
+        return longest
+
+
 if __name__ == "__main__":
     s = Solver("dc.in")
     print s
