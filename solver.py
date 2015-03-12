@@ -63,7 +63,6 @@ class Solver:
 
     def getGaranteedCapacity(self, groupIndex):
         servers = self.serversInGroup(groupIndex)#servers[i] = servers in the group i
-        print map(lambda x: x[1], servers)
         totcap = sum(map(lambda x: x[1], servers))
 
         maxi = 0
