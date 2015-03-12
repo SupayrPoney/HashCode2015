@@ -1,4 +1,5 @@
 from solver import Solver
+from random import shuffle
 
 size = lambda server: server[0]
 capa = lambda server: server[1]
@@ -8,6 +9,8 @@ hasgroup = lambda server: group(server) > -1
 
 solver = Solver("dc.in")
 i, j, g = 0, 0, 0
+
+shuffle(solver.servers)
 
 for id in range(len(solver.servers)):
 
@@ -27,4 +30,4 @@ for id in range(len(solver.servers)):
         i, j = (i+1)% solver.rangesNumber, 0
 
 print len(solver.servers) - len(solver.serversInGroup(-1)), "servers places"
-print solver.servers
+print solver.getScore()
