@@ -77,14 +77,32 @@ class Solver:
     def getScore(self):
         return min(map(self.getGaranteedCapacity, range(self.groupsNumber)))
 
+    def getServerList(self):
+        servers = [[] for i in range(self.serversNumber)]
+        i=0
+        j=0
+        while i < len(self.grid):
+            while j < len(self.grid[i]):
+                servID = self.grid[i][j]
+                if servID != -1 and servID != 'x':
+                    servers[servID] = [i, j, self.servers[servID][2]]
+                    j += self.servers[servID][0]
+                else:
+                    j+=1
+            i+=1
+
+        return servers
+
+
     def saveOutput(self):
-        with open(filename, "w") as f:
-            i=0
-            j=0
-            while i < len(self.grid):
-                while j < len(self.grid[i]):
-                    if self.grid[i][j] != -1 and self.grid[i][j] != 'x':
-                        f.write()
+        servers = self.getServerList()
+        with open("output", "w") as f:
+            for server in servers:
+                if server != []:
+                    f.write(str(server[0]) + " " + str(server[1]) + " " + str(server[2]) + "\n")
+                else:
+                    f.write("x\n")
+            
 
 
     def __repr__(self):
@@ -110,4 +128,4 @@ class Solver:
 
 if __name__ == "__main__":
     s = Solver("dc.in")
-    print s
+    s.saveOutput
