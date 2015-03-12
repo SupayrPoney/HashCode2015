@@ -19,4 +19,14 @@ class Solver:
                 s, c = map(int, f.readline().strip().split())
                 self.servers.append((s,c))
 
-Solver("dc.in")
+    def __repr__(self):
+        res = ""
+        res += "groupes:"+str(self.p)+"\n"
+        for i in range(self.r):
+            for j in range(self.s):
+                res += str(self.grid[i][j]) + " "
+            res += "\n"
+        return res
+
+s = Solver("dc.in")
+print(s)
