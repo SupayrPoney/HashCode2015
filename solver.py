@@ -2,6 +2,9 @@ class Solver:
     def __init__(self, filename):
         self.parse(filename)
 
+    def serversInGroup(self, groupnum):
+        return filter(lambda serv: serv[2] == groupnum, self.servers)
+
     def parse(self, filename):
         with open(filename, "r") as f:
             self.rangesNumber, self.slotsPerRange, self.unusedNumber, self.groupsNumber, self.serversNumber = map(int, f.readline().strip().split())
