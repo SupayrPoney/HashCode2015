@@ -25,6 +25,7 @@ class Solver:
         freespacesleft = 0
         while j < self.slotsPerRange and self.grid[i][j] != "x":
             freespacesleft+=1
+            j+=1
         return freespacesleft
 
 if __name__ == "__main__":
