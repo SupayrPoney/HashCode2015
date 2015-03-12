@@ -56,18 +56,36 @@ class Solver:
             if self.servers[self.grid[row][i]][2] == group:
                 res.append(self.servers[self.grid[row][i]])
                 i+= self.servers[self.grid[row][i]][0]
+            else:
+                i+=1
 
         return res
 
     def getGaranteedCapacity(self, groupIndex):
-        servers = []
-        servers.append(self.serversInGroup(groupIndex))#servers[i] = servers in the group i
+        servers = self.serversInGroup(groupIndex)#servers[i] = servers in the group i
+        print map(lambda x: x[1], servers)
         totcap = sum(map(lambda x: x[1], servers))
 
-        return totcap - max(sum(map(lambda x : x[1], self.getServIngroupInRow())))
+        maxi = 0
+        for row in range(self.rangesNumber):
+            cap = sum(map(lambda x: x[1], self.getServIngroupInRow(groupIndex,row)))
+            if cap>maxi :
+                maxi = cap
+
+
+        return totcap - maxi
 
     def getScore(self):
         return min(map(self.getGaranteedCapacity, range(self.groupsNumber)))
+
+    def saveOutput(self):
+        with open(filename, "w") as f:
+            i=0
+            j=0
+            while i < len(self.grid):
+                while j < len(self.grid[i]):
+                    if self.grid[i][j] != -1 and self.grid[i][j] != 'x':
+                        f.write()
 
 
 
