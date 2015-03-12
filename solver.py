@@ -11,13 +11,15 @@ class Solver:
             # unavailable spots
             for i in range(self.unusedNumber):
                 r, s = map(int, f.readline().strip().split())
-                self.grid[r][s] = "X"
+                self.grid[r][s] = "x"
 
             # all servers
             self.servers = []
-            for i in range(self.rangesNumber-self.unusedNumber):
-                s, c = map(int, f.readline().strip().split())
-                self.servers.append((s,c))
+            while True:
+                line = f.readline()
+                if not line : break
+                s, c = map(int, line.strip().split())
+                self.servers.append([s,c,-1])
 
 
    
