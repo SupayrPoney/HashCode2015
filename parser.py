@@ -1,5 +1,8 @@
-class Parser:
+class Solver:
     def __init__(self, filename):
+        self.parse(filename)
+
+    def parse(self, filename):
         with open(filename, "r") as f:
             self.r, self.s, self.u, self.p, self.m = map(int, f.readline().strip().split())
 
@@ -16,4 +19,4 @@ class Parser:
                 s, c = map(int, f.readline().strip().split())
                 self.servers.append((s,c))
 
-Parser("dc.in")
+Solver("dc.in")
