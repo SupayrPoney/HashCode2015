@@ -15,8 +15,10 @@ class Solver:
 
             # all servers
             self.servers = []
-            for i in range(self.r-self.u):
-                s, c = map(int, f.readline().strip().split())
+            while True:
+                line = f.readline()
+                if not line : break
+                s, c = map(int, line.strip().split())
                 self.servers.append((s,c))
 
 Solver("dc.in")
