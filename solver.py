@@ -105,7 +105,7 @@ class Solver:
                     if now > longest:
                         longest = now
                     now = 0
-        return longest
+        return max(longest, now)
 
 
 if __name__ == "__main__":
