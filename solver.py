@@ -21,5 +21,11 @@ class Solver:
                 s, c = map(int, line.strip().split())
                 self.servers.append([s,c,-1])
 
+    def sizeLeft(self, i, j):
+        freespacesleft = 0
+        while j < self.slotsPerRange and self.grid[i][j] != "x":
+            freespacesleft+=1
+        return freespacesleft
+
 if __name__ == "__main__":
     Solver("dc.in")
