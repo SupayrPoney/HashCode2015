@@ -63,7 +63,6 @@ class Solver:
 
     def getGaranteedCapacity(self, groupIndex):
         servers = self.serversInGroup(groupIndex)#servers[i] = servers in the group i
-        print map(lambda x: x[1], servers)
         totcap = sum(map(lambda x: x[1], servers))
 
         maxi = 0
@@ -113,6 +112,19 @@ class Solver:
                 res += str(self.grid[i][j]) + " "
             res += "\n"
         return res
+
+    def maxHoleSize(self):
+        longest, now = 0, 0
+        for line in self.grid:
+            for serv in line:
+                if serv == -1:
+                    now += 1
+                else:
+                    if now > longest:
+                        longest = now
+                    now = 0
+        return max(longest, now)
+
 
 if __name__ == "__main__":
     s = Solver("dc.in")
