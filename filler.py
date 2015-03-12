@@ -43,6 +43,7 @@ def main():
     print len(filter(lambda s: not s[3], solver.servers)), "servers a placer"
     print solver
     print "\033[1;31mYOU WIN", solver.getScore(), "\033[0m"
+    solver.unusedServer()
 
 if __name__ == "__main__":
     main()

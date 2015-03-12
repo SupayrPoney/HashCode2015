@@ -95,6 +95,13 @@ class Solver:
             res += "\n"
         return res
 
+    def unusedServer(self) :
+        servers = []
+        for server in self.servers:
+            if server[2]==-1:
+                print server
+
+
 if __name__ == "__main__":
     s = Solver("dc.in")
     print s
