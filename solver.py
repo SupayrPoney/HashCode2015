@@ -122,6 +122,7 @@ class Solver:
     def maxHoleSize(self):
         longest, now = 0, 0
         for line in self.grid:
+            now = 0
             for serv in line:
                 if serv == -1:
                     now += 1

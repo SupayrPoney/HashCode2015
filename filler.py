@@ -1,5 +1,4 @@
 from solver import Solver
-from random import shuffle
 
 size = lambda server: server[0]
 capa = lambda server: server[1]
@@ -17,6 +16,12 @@ def irange(i):
 
 def jrange(j):
     return modrange(j, j+solver.slotsPerRange, solver.slotsPerRange)
+
+# Sort servers by decreasing size
+#solver.servers.sort(key=lambda s: -s[0])
+
+# Sort servers by perf/size ratio decreasing
+solver.servers.sort(key=lambda s: float(-s[1])/s[0])
 
 def main():
     g = 0
@@ -41,7 +46,7 @@ def main():
     print len(filter(lambda s: s[3], solver.servers)), "servers places"
     print len(filter(lambda s: not s[3], solver.servers)), "servers a placer"
     print solver
-    print "\033[1;31mYOU WIN", solver.getScore(), "\033[0m"
+    print "\033[1;31mYOU WIN", solver.getScore(), "\033[0mMax hole size:", solver.maxHoleSize()
     solver.unusedServer()
     print solver.maxHoleSize()
 
