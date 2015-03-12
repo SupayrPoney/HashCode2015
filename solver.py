@@ -82,6 +82,7 @@ class Solver:
         i=0
         j=0
         while i < len(self.grid):
+            j=0
             while j < len(self.grid[i]):
                 servID = self.grid[i][j]
                 if servID != -1 and servID != 'x':
@@ -98,10 +99,10 @@ class Solver:
         servers = self.getServerList()
         with open("output", "w") as f:
             for server in servers:
-                if server != []:
-                    f.write(str(server[0]) + " " + str(server[1]) + " " + str(server[2]) + "\n")
-                else:
+                if server == []:
                     f.write("x\n")
+                else:
+                    f.write(str(server[0]) + " " + str(server[1]) + " " + str(server[2]) + "\n")
             
 
 
