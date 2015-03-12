@@ -19,7 +19,7 @@ class Solver:
                 line = f.readline()
                 if not line : break
                 s, c = map(int, line.strip().split())
-                self.servers.append([s,c,-1])
+                self.servers.append([s,c,-1,False]) # size, capacity, groupid, isAssigned?
 
     def sizeLeft(self, i, j):
         freespacesleft = 0
@@ -28,5 +28,16 @@ class Solver:
             j+=1
         return freespacesleft
 
+    def firstAvailableServerWithSize(self, size):
+        i = 0
+        while i< len(self.servers):
+            server = self.servers[i]
+            i+=1
+            if server[0] != size: continue
+            if server[3] == True : continue
+            return i-1
+        return -1
+
+
 if __name__ == "__main__":
-    Solver("dc.in")
+    s = Solver("dc.in")
