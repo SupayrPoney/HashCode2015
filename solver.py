@@ -9,7 +9,7 @@ class Solver:
         with open(filename, "r") as f:
             self.rangesNumber, self.slotsPerRange, self.unusedNumber, self.groupsNumber, self.serversNumber = map(int, f.readline().strip().split())
 
-            self.grid = [[0 for i in range(self.slotsPerRange)] for j in range(self.rangesNumber)]
+            self.grid = [[-1 for i in range(self.slotsPerRange)] for j in range(self.rangesNumber)]
 
             # unavailable spots
             for i in range(self.unusedNumber):
@@ -22,14 +22,24 @@ class Solver:
                 line = f.readline()
                 if not line : break
                 s, c = map(int, line.strip().split())
-                self.servers.append([s,c,-1])
+                self.servers.append([s,c,-1,False]) # size, capacity, groupid, isAssigned?
 
     def sizeLeft(self, i, j):
-        freespacesleft = 0
-        while j < self.slotsPerRange and self.grid[i][j] != "x":
-            freespacesleft+=1
-            j+=1
-        return freespacesleft
+        for k in range(j, self.slotsPerRange):
+            if self.grid[i][k] != -1:
+                return k-j
+        return self.slotsPerRange - j
+
+    def firstAvailableServerWithSize(self, size):
+        i = 0
+        while i< len(self.servers):
+            server = self.servers[i]
+            i+=1
+            if server[0] != size: continue
+            if server[3] == True : continue
+            return i-1
+        return -1
+
 
 
     def getServIngroupInRow(self,group,row):
@@ -64,4 +74,4 @@ class Solver:
 
 
 if __name__ == "__main__":
-    Solver("dc.in")
+    s = Solver("dc.in")
