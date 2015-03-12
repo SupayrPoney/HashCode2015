@@ -25,11 +25,10 @@ class Solver:
                 self.servers.append([s,c,-1])
 
     def sizeLeft(self, i, j):
-        freespacesleft = 0
-        while j < self.slotsPerRange and self.grid[i][j] != "x":
-            freespacesleft+=1
-            j+=1
-        return freespacesleft
+        for k in range(j, self.slotsPerRange):
+            if self.grid[i][k] != -1:
+                return k-j
+        return self.slotsPerRange - j
 
 if __name__ == "__main__":
     Solver("dc.in")
