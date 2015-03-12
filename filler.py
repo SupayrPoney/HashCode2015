@@ -17,16 +17,28 @@ def irange(i):
 def jrange(j):
     return modrange(j, j+solver.slotsPerRange, solver.slotsPerRange)
 
+def compact():
+    for i in irange(0):
+        for j in jrange(0):
+            if solver.grid[i][j] == -1:
+                for k in range(j+1, solver.slotsPerRange):
+                    if solver.grid[i][k] == 'x':
+                        if k > j+1:
+                            solver.grid[i][k-1] = -1
+                        break
+                    solver.grid[i][k-1] = solver.grid[i][k]
+
 # Sort servers by decreasing size
 #solver.servers.sort(key=lambda s: -s[0])
 
 # Sort servers by perf/size ratio decreasing
 solver.servers.sort(key=lambda s: float(-s[1])/s[0])
 
-def main():
-    g = 0
+def main(g=0):
     for id in range(len(solver.servers)):
         serv = solver.servers[id]
+        if serv[3]:
+            continue
         placed = False
         for i in irange(id):
             if placed:
@@ -47,6 +59,14 @@ def main():
     print len(filter(lambda s: not s[3], solver.servers)), "servers a placer"
     print solver
     print "\033[1;31mYOU WIN", solver.getScore(), "\033[0mMax hole size:", solver.maxHoleSize()
+    solver.saveOutput()
+    return g
 
 if __name__ == "__main__":
-    main()
+    g = main()
+    print solver.grid[0]
+    compact()
+    print solver.grid[0]
+    print "\033[1;31mYOU WIN", solver.getScore(), "\033[0mMax hole size:", solver.maxHoleSize()
+    
+    main(g)

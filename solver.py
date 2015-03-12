@@ -28,7 +28,7 @@ class Solver:
         for k in range(j, self.slotsPerRange):
             if self.grid[i][k] != -1:
                 return k-j
-        return self.slotsPerRange - j
+        return self.slotsPerRange - j - 1
 
     def firstAvailableServerWithSize(self, size):
         i = 0
@@ -124,6 +124,8 @@ class Solver:
                     if now > longest:
                         longest = now
                     now = 0
+            if now > longest:
+                longest = now
         return max(longest, now)
 
 
