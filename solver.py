@@ -114,9 +114,16 @@ class Solver:
             res += "\n"
         return res
 
+    def unusedServer(self) :
+        servers = []
+        for server in self.servers:
+            if server[2]==-1:
+                print server
+
     def maxHoleSize(self):
         longest, now = 0, 0
         for line in self.grid:
+            now = 0
             for serv in line:
                 if serv == -1:
                     now += 1
@@ -125,7 +132,6 @@ class Solver:
                         longest = now
                     now = 0
         return max(longest, now)
-
 
 if __name__ == "__main__":
     s = Solver("dc.in")
